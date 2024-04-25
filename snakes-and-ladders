@@ -1,0 +1,31 @@
+import random
+
+# Game board: key is the start of snake or ladder, value is the end point
+snakes_and_ladders = {
+    2: 15, 5: 7, 9: 27, 18: 29, 25: 35, 17: 4, 20: 6, 24: 16, 32: 10, 34: 12
+}
+
+def roll_dice():
+    return random.randint(1, 6)
+
+def move_player(position):
+    dice_roll = roll_dice()
+    print(f"Dice roll: {dice_roll}")
+    position += dice_roll
+    if position in snakes_and_ladders:
+        print("Hit a snake or a ladder!")
+        position = snakes_and_ladders[position]
+    return position
+
+def play_game():
+    player_position = 0
+    while player_position < 36:
+        input("Press enter to roll the dice...")
+        player_position = move_player(player_position)
+        print(f"Player position: {player_position}")
+        if player_position >= 36:
+            print("Congratulations, you won!")
+            break
+
+if __name__ == "__main__":
+    play_game()
